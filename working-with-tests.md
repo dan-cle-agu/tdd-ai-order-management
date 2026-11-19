@@ -1,0 +1,35 @@
+This project is built entirely with a test-first approach. You will not write any code without first writing (or running) a test that describes its expected behavior. Following the Red → Green → Refactor cycle is the key to success:
+
+Write or run a test (it should fail).
+Implement the minimum code needed to make the test pass.
+Refactor your code if necessary, then move on to the next test.
+Types of Tests
+There are two kinds of tests in this project:
+
+Unit tests in backend/tests/test_order_tracker.py. These validate the core logic in order_tracker.py using mock storage objects.
+Integration tests in backend/tests/test_api.py. These spin up the Flask app and check that the API routes behave correctly with the in-memory storage.
+Running Tests
+⚠️ Important: Always run pytest from the project root directory (the starter folder). This ensures that Python imports (like from backend.app import app) work correctly.
+
+If you see an error like ModuleNotFoundError: No module named 'backend' this most likely means that you are running pytest from the wrong folder.
+
+Run all tests (both unit and integration):
+   pytest
+(Because we include a pytest.ini in the starter code, this automatically runs everything inside backend/tests/.)
+
+Run only unit tests for the OrderTracker:
+   pytest backend/tests/test_order_tracker.py
+Run only integration tests for the API:
+   pytest backend/tests/test_api.py
+Run a single test function by name:
+   pytest -k test_add_order_api_success
+Note for Windows Users
+The examples in this project use Unix-style paths with forward slashes (/). On Windows (PowerShell), replace them with backslashes (\). For example:
+
+pytest backend\tests\test_order_tracker.py
+Understanding the Fixtures
+Both test files make use of pytest fixtures:
+
+In the unit tests, fixtures provide a reusable mock storage object. This lets you test logic in isolation, without touching real data.
+In the integration tests, fixtures provide a Flask test client. This client simulates HTTP requests to your routes so you can assert on responses without starting a real server.
+These fixtures are already written for you, so you can focus on implementing the logic and routes that make the tests pass.
